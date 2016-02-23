@@ -1,0 +1,62 @@
+{% extends "Iframify/common.twig" %}
+
+{% set title = {
+                'title': "Iframes list"|trans,
+                'help': "Manage the list of iframes"|trans} %}
+
+{% set sidebarActivated = true %}
+{% block sidebar %}
+  {% include 'sidebar.twig' %}
+{% endblock %}
+
+
+{% block content %}{{ parent() }}
+{% set editUrl = url('iframify_iframes_edit', {"Id" : "0"} ) %}
+{% set editUrl = editUrl|truncate(editUrl|length -1, false, '') %}
+
+<script type="text/javascript">
+    function delete_iframe(id) {
+        bootbox.confirm("{% trans %}Are you sure that you want to delete this iframe ?{% endtrans %}", "{% trans %}No{% endtrans %}", "{% trans %}Yes{% endtrans %}", function(result) {
+            if(result) window.location.href="{{ url('iframify_iframes_del', {"Id":''}) }}" + id;
+        });
+    }
+</script>
+
+{# start #}
+<div class="row-fluid" align="right">
+    <a href="{{ url('iframify_iframes_new') }}" class="btn btn-success btn-small"><i class="icon-plus-sign icon-white"></i> {% trans %}Add new iframe{% endtrans %}</a>
+</div>
+<br />
+
+{% import "table.twig" as table_data %}
+{{ table_data.datatable() }}
+
+<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-condensed table-striped table-hover" id="table_data">
+    <thead>
+        <tr>
+            <th>{% trans %}Name{% endtrans %}</th>
+            <th>{% trans %}URL{% endtrans %}</th>
+            <th>{% trans %}Actions{% endtrans %}</th>
+        </tr>
+    </thead>
+    <tbody>
+       {% for row in data_table %}
+            <tr>
+                <td>{{ row.title }}</td>
+                <td>{{ row.url }}</td>
+                <td>
+                    <a href="{{ url('iframify_iframes_edit', {'Id':row.id}) }}" class="btn btn-mini a-visible-line-on-over">
+                        <i class="icon-edit"></i> {% trans %}Edit{% endtrans %}
+                    </a>
+                    <a href="javascript:delete_iframe('{{ row.id }}')" class="btn btn-danger btn-mini a-visible-line-on-over">
+                        <i class="icon-trash icon-white"></i> {% trans %}Delete{% endtrans %}
+                    </a>
+                </td>
+            </tr>
+      {% endfor %}
+    </tbody>
+</table>
+{# End #}
+
+
+{% endblock %}

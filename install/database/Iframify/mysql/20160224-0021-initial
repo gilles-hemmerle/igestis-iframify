@@ -1,0 +1,9 @@
+
+CREATE TABLE IF NOT EXISTS `IFRAMIFY_IFRAMES` (
+  `id` mediumint(9) NOT NULL AUTO_INCREMENT,
+  `title` varchar(120) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `url` text COLLATE utf8_unicode_ci,
+  `root_menu` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `menu_entry` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;

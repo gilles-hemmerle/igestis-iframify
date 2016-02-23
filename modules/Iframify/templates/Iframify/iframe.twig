@@ -1,0 +1,32 @@
+{% extends 'commonIframe.twig' %}
+
+{% set title = {'logo': "emblem-companies",
+                'title': iframe.title,
+                'help': "View and manage your emails"} %}
+
+{% block content %}
+<div id="iframeMain">
+    <iframe frameborder=0 src="{{ iframe.url }}"></iframe>
+</div>
+<script>
+
+
+function resizeIframe() {
+    var top = $("#general-menu").offset().top + $("#general-menu").outerHeight();
+    var height = $('body').height() - top;
+    $('#iframeMain').css({
+        'height' : height+'px',
+        'position' : 'absolute',
+        'top' : top + 'px',
+        'width' : "100%"
+    });
+    $('#iframeMain').height(height);    
+}
+
+$(window).resize(function() {  
+  resizeIframe();
+});
+resizeIframe();
+</script>
+
+{% endblock %}

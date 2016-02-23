@@ -1,0 +1,65 @@
+{% extends "Commercial/common.twig" %}
+
+{% set title = {
+                'title': "Create a new iframe"|trans,
+                'help': "Fill all information about the new iframe"|trans} %}
+
+{% block content %}{{ parent() }}
+
+
+<div class="well">
+    <form id="form_data" method='post' action=''>
+        <fieldset>
+            <legend>{% trans %}Iframe information{% endtrans %}</legend>
+            <div class="row-fluid">
+                <div class="span12">
+                    {{ forms.input('title', 'Iframe title'|trans, form_data.title) }}
+                    {{ forms.input('url', 'Url'|trans, form_data.url) }}
+                    {{ forms.input('rootMenu', 'Root menu'|trans, form_data.rootMenu) }}
+                    {{ forms.input('menuEntry', 'Menu entry (optionnal)'|trans, form_data.menuEntry) }}
+                </div>
+
+            </div>
+            <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">{% trans %}Save changes{% endtrans %}</button>
+                    <input class="btn" type="button" value="{% trans %}Cancel{% endtrans %}" onclick="javascript:history.go(-1);return true;">
+            </div>
+
+        </fieldset>
+    </form>
+</div>
+
+<script>
+$(document).ready(function(){
+    $("#form_data").validate({
+        ignore: "input[type='text']:hidden",
+        rules:{
+            title:{
+                required:true
+            },
+            url:{
+                required:true
+            },
+            rootMenu:{
+                required:true
+            }
+        },
+        errorClass: "help-inline",
+        errorElement: "span",
+        errorPlacement: function(error, element) {
+            element.parent().after(error);
+        },
+        highlight:function(element, errorClass, validClass) {
+            $(element).parents('.control-group').removeClass('success');
+            $(element).parents('.control-group').addClass('error');
+        },
+        unhighlight: function(element, errorClass, validClass) {
+            $(element).parents('.control-group').removeClass('error');
+            $(element).parents('.control-group').addClass('success');
+        }
+});
+});
+</script>
+
+
+{% endblock %}
