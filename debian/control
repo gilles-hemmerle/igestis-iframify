@@ -7,9 +7,7 @@ Standards-Version: 3.7.2
 
 Package: igestis-iframify
 Architecture: all
-Depends: igestis (>= 2.3.3), fetchmail
-Suggests: dovecot-managesieved, dovecot-sieve, dovecot-imapd, cyrus-imapd
-Description: Web Mail for iGestis
- This module also the users to access to
- their mail through a sexy and modern
- web application.
+Depends: igestis (>= 3), igestis (<= 4)
+Description: Add any external website in iGestis menu
+ This module allow to create new menu entries in order
+ to access on external website within an iframe.
